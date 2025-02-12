@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Application</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <div class="container">
+        <div align="center">
+            <h1>Todo Application</h1>
+        </div>
+        <div align="center">
+            <form action="/" method="post">
+                <input type="text" name="title" placeholder="Enter the task" required="required">
+                <button>Add</button>
+            </form>
+        </div>
+        
+        <div align="center">
+            <th:block th:each="task : ${tasks}">
+                <div class="task-container">
+                    <span class="task-title" th:text="${task.title}">Task Title</span>
+                    <div>
+                        <a th:href="@{/{id}/completed(id=${task.id})}" th:if="${!task.completed}">
+                            <button class="complete-button">Complete</button>
+                        </a>
+                        <a th:href="@{/{id}/delete(id=${task.id})}">
+                            <button class="delete-button">Delete</button>
+                        </a>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+</body>
+</html>
